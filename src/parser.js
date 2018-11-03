@@ -1,3 +1,7 @@
-const parser = require('@babel/parser');
+const babelParser = require('@babel/parser');
+const fs = require('fs');
 
-console.log('');
+var content = fs.readFileSync(__dirname + '/Welcome/index.js', 'utf8');
+const ast = babelParser.parse(content);
+
+console.log(ast);
