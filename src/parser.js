@@ -21,11 +21,11 @@ const reduceAst = (oldNode, currentNode) => {
 };
 
 const getTree = (content) => {
-  const ast = babelParser.parse(content, {
+  const rawAst = babelParser.parse(content, {
     sourceType: 'module',
     plugins: ['jsx'],
   });
-  const initialAst = ast.program.body.find(
+  const initialAst = rawAst.program.body.find(
     (astNode) => astNode.type === 'ExportNamedDeclaration',
   ).declaration.declarations[0].init.body.body[0].argument;
 
