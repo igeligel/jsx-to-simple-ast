@@ -1,5 +1,5 @@
-const getTree = require('../parser');
-const { welcomeComponent, customComponent } = require('./constants');
+import { getTree } from '../parser';
+import { welcomeComponent, customComponent } from './constants';
 
 describe('Get Tree', () => {
   it('should return a proper tree of jsx elements for the welcome component', () => {

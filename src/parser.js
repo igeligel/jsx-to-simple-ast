@@ -1,4 +1,4 @@
-const babelParser = require('@babel/parser');
+import babelParser from '@babel/parser';
 
 const reduceAstNode = (oldNode, currentNode) => {
   let element = {};
@@ -20,7 +20,7 @@ const reduceAstNode = (oldNode, currentNode) => {
   return oldNode;
 };
 
-const getTree = (content) => {
+export const getTree = (content) => {
   const rawAst = babelParser.parse(content, {
     sourceType: 'module',
     plugins: ['jsx'],
@@ -32,4 +32,6 @@ const getTree = (content) => {
   return reduceAstNode([], initialAst);
 };
 
-module.exports = getTree;
+export default {
+  getTree,
+};

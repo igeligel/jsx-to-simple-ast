@@ -1,5 +1,6 @@
 {
   "author": "",
+  "browser": "dist/jsx-to-simple-ast.umd.js",
   "bugs": {
     "url": "https://github.com/igeligel/parse-react-components/issues"
   },
@@ -8,11 +9,16 @@
   },
   "description": "",
   "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "husky": "^1.1.3",
     "jest": "^23.6.0",
     "lint-staged": "^8.0.4",
     "nodemon": "^1.18.6",
     "prettier": "^1.14.3",
+    "regenerator-runtime": "^0.13.1",
     "rollup": "^0.67.3"
   },
   "homepage": "https://github.com/igeligel/parse-react-components#readme",
@@ -29,16 +35,23 @@
       "git add"
     ]
   },
-  "main": "index.js",
-  "name": "parse-react-components",
+  "jest": {
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    }
+  },
+  "main": "dist/jsx-to-simple-ast.cjs.js",
+  "module": "dist/jsx-to-simple-ast.esm.js",
+  "name": "jsx-to-simple-ast",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/igeligel/parse-react-components.git"
+    "url": "git+https://github.com/igeligel/jsx-to-simple-ast.git"
   },
   "scripts": {
-    "dev": "nodemon ./src/example.js",
-    "dev:debug": "ndb ./src/example.js",
-    "start": "node ./src/example.js",
+    "build": "rollup -c",
+    "dev": "npm build && nodemon ./example/example.js",
+    "dev:debug": "npm build && ndb ./example/example.js",
+    "start": "npm build && node ./example/example.js",
     "test": "jest"
   },
   "version": "0.0.1"
