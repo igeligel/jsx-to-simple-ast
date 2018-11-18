@@ -1,6 +1,6 @@
 const babelParser = require('@babel/parser');
 
-const reduceAst = (oldNode, currentNode) => {
+const reduceAstNode = (oldNode, currentNode) => {
   let element = {};
   if (currentNode.type === 'JSXElement') {
     element = {
@@ -13,8 +13,8 @@ const reduceAst = (oldNode, currentNode) => {
     currentNode.children.forEach(
       (node) =>
         oldNode.length > 0
-          ? reduceAst(element.children, node)
-          : reduceAst(oldNode, node),
+          ? reduceAstNode(element.children, node)
+          : reduceAstNode(oldNode, node),
     );
   }
   return oldNode;
@@ -29,7 +29,7 @@ const getTree = (content) => {
     (astNode) => astNode.type === 'ExportNamedDeclaration',
   ).declaration.declarations[0].init.body.body[0].argument;
 
-  return reduceAst([], initialAst);
+  return reduceAstNode([], initialAst);
 };
 
 module.exports = getTree;
